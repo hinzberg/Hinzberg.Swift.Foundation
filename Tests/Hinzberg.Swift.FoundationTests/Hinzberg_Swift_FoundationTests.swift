@@ -2,10 +2,44 @@ import XCTest
 @testable import Hinzberg_Swift_Foundation
 
 final class Hinzberg_Swift_FoundationTests: XCTestCase {
+    
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(Hinzberg_Swift_Foundation().text, "Hello, World!")
     }
+    
+    func testRandomNumbers()
+    {
+        for i:Int in 1  ..< 40
+        {
+            let value = Int.random(lower: i, upper: i + 10 )
+            XCTAssert(value >= i && value <= i + 10)
+        }
+    }
+    
+    func testStringHelper()
+    {
+        let value = "The quick brown fox jumps over the lazy dog"
+        
+        XCTAssert(value.getIndexOf(substring: "quick") == 4)
+        XCTAssert(value.caseInsensitiveBeginsWith(anotherString: "the"))
+        XCTAssert(value.caseInsensitiveEndsWith(anotherString: "dog"))
+        XCTAssert(value.caseInsensitiveContains(substring: "fox"))
+        XCTAssert(value.substringRightOf(searchString: "lazy") == " dog")
+        XCTAssert(value.substringLeftOf(searchString: "quick") == "The ")
+        
+        // Neu 2017-07-17
+        XCTAssert(value.substringRightFrom(characterCount: 10) == "brown fox jumps over the lazy dog")
+        XCTAssert(value.substringLeftFrom(characterCount: 9) == "The quick brown fox jumps over the")
+        
+        // Neu 2017-08-20
+        XCTAssert(value.substringLeftOf(searchString: "quick") == "The ")
+        XCTAssert(value.substringRightOf(searchString: "lazy") == " dog")
+    }
+    
+    func testArrayHelper() {
+        let array = ["one", "one", "two", "two", "three", "three"]
+        let unique = array.unique
+        XCTAssert(unique.count == 3)
+    }
+    
+    
 }
