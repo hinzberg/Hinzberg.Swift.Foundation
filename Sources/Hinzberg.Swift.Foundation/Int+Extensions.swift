@@ -6,7 +6,7 @@ import Foundation
 
 public extension Int
 {
-    static func random(lower:Int, upper:Int) -> Int
+    public static func random(lower:Int, upper:Int) -> Int
     {
         let max = UInt32(upper - lower + 1)
         let res = arc4random_uniform(max)

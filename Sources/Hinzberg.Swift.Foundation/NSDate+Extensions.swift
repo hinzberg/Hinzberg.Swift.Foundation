@@ -7,7 +7,7 @@ import Foundation
 public extension NSDate
 {
     // Sample: NSDate(dateString:"2014-06-06")
-    convenience init(dateString:String)
+    public convenience init(dateString:String)
     {
         let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "yyyy-MM-dd"

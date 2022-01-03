@@ -6,7 +6,7 @@ import Foundation
 
 public extension String
 {
-    func caseInsensitiveContains(substring:String) -> Bool
+    public func caseInsensitiveContains(substring:String) -> Bool
     {
         if (self.lowercased().contains(substring.lowercased()))
         {
@@ -15,14 +15,14 @@ public extension String
         return false
     }
     
-    func getIndexOf(substring:String)->Int
+    public func getIndexOf(substring:String)->Int
     {
         let theRange:Range = self.lowercased().range(of:substring.lowercased())!
         let index: Int = self.distance(from: self.startIndex, to: theRange.lowerBound)
         return index
     }
 
-    func substringLeftOf(searchString:String) ->String
+    public func substringLeftOf(searchString:String) ->String
     {
         let theRange = self.range(of: searchString)
         if let theRange = theRange
@@ -34,7 +34,7 @@ public extension String
         return self
     }
     
-    func substringRightOf(searchString:String) ->String
+    public func substringRightOf(searchString:String) ->String
     {
         let theRange = self.range(of: searchString)
         if let theRange = theRange
@@ -45,7 +45,7 @@ public extension String
         return self
     }
     
-    func substringRightFrom(characterCount:Int) -> String
+    public func substringRightFrom(characterCount:Int) -> String
     {
         if characterCount > 0 && characterCount < self.count
         {
@@ -55,7 +55,7 @@ public extension String
         return self
     }
     
-    func left(_ characterCount : Int) -> String
+    public func left(_ characterCount : Int) -> String
     {
         if characterCount > 0 && characterCount < self.count
         {
@@ -65,7 +65,7 @@ public extension String
         return self
     }
     
-    func substringLeftFrom(characterCount:Int) -> String
+    public func substringLeftFrom(characterCount:Int) -> String
     {
         if characterCount > 0 && characterCount < self.count
         {
@@ -75,7 +75,7 @@ public extension String
         return self
     }
     
-    func caseInsensitiveEndsWith(anotherString:String)->Bool
+    public func caseInsensitiveEndsWith(anotherString:String)->Bool
     {
         // Position wo die Zeichenkette ist.
         let indexOfAnotherString = getIndexOf(substring: anotherString)
@@ -89,7 +89,7 @@ public extension String
         return false
     }
     
-    func caseInsensitiveBeginsWith(anotherString:String)->Bool
+    public func caseInsensitiveBeginsWith(anotherString:String)->Bool
     {
         let indexOfAnotherString = getIndexOf(substring: anotherString)
         if indexOfAnotherString == 0
@@ -99,7 +99,7 @@ public extension String
         return false
     }
     
-    func appendingPathComponent(_ string: String) -> String
+    public func appendingPathComponent(_ string: String) -> String
     {
         return URL(fileURLWithPath: self).appendingPathComponent(string).path
     }
