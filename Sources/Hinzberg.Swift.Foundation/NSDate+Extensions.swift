@@ -4,7 +4,7 @@
 
 import Foundation
 
-extension NSDate
+public extension NSDate
 {
     // Sample: NSDate(dateString:"2014-06-06")
     convenience init(dateString:String)

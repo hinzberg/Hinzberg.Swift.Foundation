@@ -4,7 +4,7 @@
 
 import Foundation
 
-extension String
+public extension String
 {
     func caseInsensitiveContains(substring:String) -> Bool
     {

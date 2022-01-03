@@ -3,8 +3,8 @@
 
 import Foundation
 
-extension Array where Element: Equatable {
-    
+public extension Array where Element: Equatable
+{
     var unique: [Element] {
         var uniqueValues: [Element] = []
         forEach { item in
