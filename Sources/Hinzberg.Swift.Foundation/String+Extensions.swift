@@ -6,6 +6,27 @@ import Foundation
 
 public extension String
 {
+    public func left(characterCount : Int) -> String
+    {
+        if characterCount > 0 && characterCount < self.count
+        {
+            let sub = String(self[..<self.index(self.startIndex, offsetBy: characterCount)])
+            return sub
+        }
+        return self
+    }
+    
+    public func right(characterCount : Int) -> String
+    {
+        if characterCount > 0 && characterCount < self.count
+        {
+            let sub = String(self[self.index(self.endIndex, offsetBy: (characterCount * -1))...])
+            return sub
+        }
+        return self
+    }
+    
+    
     public func caseInsensitiveContains(substring:String) -> Bool
     {
         if (self.lowercased().contains(substring.lowercased()))
@@ -22,9 +43,18 @@ public extension String
         return index
     }
 
-    public func substringLeftOf(searchString:String) ->String
+    public func substringBefore(searchString:String, options: NSString.CompareOptions? = nil) ->String
     {
-        let theRange = self.range(of: searchString)
+        var theRange : Range<String.Index>?
+        if let options = options
+        {
+            theRange = self.range(of: searchString, options: options)
+        }
+        else
+        {
+            theRange = self.range(of: searchString)
+        }
+
         if let theRange = theRange
         {
             let endIndex = theRange.lowerBound
@@ -34,9 +64,20 @@ public extension String
         return self
     }
     
-    public func substringRightOf(searchString:String) ->String
+
+    
+    public func substringAfter(searchString:String, options: NSString.CompareOptions? = nil) ->String
     {
-        let theRange = self.range(of: searchString)
+        var theRange : Range<String.Index>?
+        if let options = options
+        {
+            theRange = self.range(of: searchString, options: options)
+        }
+        else
+        {
+            theRange = self.range(of: searchString)
+        }
+        
         if let theRange = theRange
         {
             let str = String(self[theRange.upperBound..<self.endIndex])
@@ -44,6 +85,9 @@ public extension String
         }
         return self
     }
+    
+    
+
     
     public func substringRightFrom(characterCount:Int) -> String
     {
@@ -55,15 +99,7 @@ public extension String
         return self
     }
     
-    public func left(_ characterCount : Int) -> String
-    {
-        if characterCount > 0 && characterCount < self.count
-        {
-            let sub = String(self[..<self.index(self.startIndex, offsetBy: characterCount)])
-            return sub
-        }
-        return self
-    }
+
     
     public func substringLeftFrom(characterCount:Int) -> String
     {
@@ -103,4 +139,32 @@ public extension String
     {
         return URL(fileURLWithPath: self).appendingPathComponent(string).path
     }
+    
+    //MARK: Deprecated functions
+    
+    @available(*, deprecated, message: "Use substringAfter instead")
+    public func substringRightOf(searchString:String) ->String
+    {
+        let theRange = self.range(of: searchString)
+        if let theRange = theRange
+        {
+            let str = String(self[theRange.upperBound..<self.endIndex])
+            return str
+        }
+        return self
+    }
+    
+    @available(*, deprecated, message: "Use substringBefore instead")
+    public func substringLeftOf(searchString:String) ->String
+    {
+        let theRange = self.range(of: searchString)
+        if let theRange = theRange
+        {
+            let endIndex = theRange.lowerBound
+            let str = String(self[self.startIndex..<endIndex])
+            return str
+        }
+        return self
+    }
+    
 }

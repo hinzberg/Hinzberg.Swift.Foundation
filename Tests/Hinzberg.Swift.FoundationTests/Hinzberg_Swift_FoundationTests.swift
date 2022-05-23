@@ -23,16 +23,20 @@ final class Hinzberg_Swift_FoundationTests: XCTestCase {
         XCTAssert(value.caseInsensitiveBeginsWith(anotherString: "the"))
         XCTAssert(value.caseInsensitiveEndsWith(anotherString: "dog"))
         XCTAssert(value.caseInsensitiveContains(substring: "fox"))
-        XCTAssert(value.substringRightOf(searchString: "lazy") == " dog")
-        XCTAssert(value.substringLeftOf(searchString: "quick") == "The ")
         
-        // Neu 2017-07-17
+        // XCTAssert(value.substringRightOf(searchString: "lazy") == " dog") deprecated
+        XCTAssert(value.substringAfter(searchString:  "lazy") == " dog")
+        XCTAssert(value.substringAfter(searchString:  "LAZY", options: NSString.CompareOptions.caseInsensitive) == " dog")
+        
+        // XCTAssert(value.substringLeftOf(searchString: "quick") == "The ") deprecated
+        XCTAssert(value.substringBefore(searchString: "quick") == "The ")
+        XCTAssert(value.substringBefore(searchString: "QUICK", options: NSString.CompareOptions.caseInsensitive) == "The ")
+        
+        XCTAssert(value.left(characterCount: 9) == "The quick");
+        XCTAssert(value.right(characterCount: 8) == "lazy dog");
+                
         XCTAssert(value.substringRightFrom(characterCount: 10) == "brown fox jumps over the lazy dog")
         XCTAssert(value.substringLeftFrom(characterCount: 9) == "The quick brown fox jumps over the")
-        
-        // Neu 2017-08-20
-        XCTAssert(value.substringLeftOf(searchString: "quick") == "The ")
-        XCTAssert(value.substringRightOf(searchString: "lazy") == " dog")
     }
     
     func testArrayHelper() {
@@ -40,6 +44,4 @@ final class Hinzberg_Swift_FoundationTests: XCTestCase {
         let unique = array.unique
         XCTAssert(unique.count == 3)
     }
-    
-    
 }
