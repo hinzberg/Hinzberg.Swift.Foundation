@@ -105,6 +105,29 @@ public extension String
         }
         return self
     }
+    
+    public func substringBeforeIncluding(searchString:String, options: NSString.CompareOptions? = nil) ->String
+    {
+        var theRange : Range<String.Index>?
+        if let options = options
+        {
+            theRange = self.range(of: searchString, options: options)
+        }
+        else
+        {
+            theRange = self.range(of: searchString)
+        }
+
+        if let theRange = theRange
+        {
+            let endIndex = theRange.upperBound
+            let str = String(self[self.startIndex..<endIndex])
+            return str
+        }
+        return self
+    }
+    
+    
         
     public func substringAfter(searchString:String, options: NSString.CompareOptions? = nil) ->String
     {
@@ -121,6 +144,26 @@ public extension String
         if let theRange = theRange
         {
             let str = String(self[theRange.upperBound..<self.endIndex])
+            return str
+        }
+        return self
+    }
+    
+    public func substringAfterIncluding(searchString:String, options: NSString.CompareOptions? = nil) ->String
+    {
+        var theRange : Range<String.Index>?
+        if let options = options
+        {
+            theRange = self.range(of: searchString, options: options)
+        }
+        else
+        {
+            theRange = self.range(of: searchString)
+        }
+        
+        if let theRange = theRange
+        {
+            let str = String(self[theRange.lowerBound..<self.endIndex])
             return str
         }
         return self

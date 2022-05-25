@@ -27,11 +27,13 @@ final class Hinzberg_Swift_FoundationTests: XCTestCase {
         // XCTAssert(value.substringRightOf(searchString: "lazy") == " dog") deprecated
         XCTAssert(value.substringAfter(searchString:  "lazy") == " dog")
         XCTAssert(value.substringAfter(searchString:  "LAZY", options: NSString.CompareOptions.caseInsensitive) == " dog")
-        
+        XCTAssert(value.substringAfterIncluding(searchString:  "lazy") == "lazy dog")
+               
         // XCTAssert(value.substringLeftOf(searchString: "quick") == "The ") deprecated
         XCTAssert(value.substringBefore(searchString: "quick") == "The ")
         XCTAssert(value.substringBefore(searchString: "QUICK", options: NSString.CompareOptions.caseInsensitive) == "The ")
-        
+        XCTAssert(value.substringBeforeIncluding(searchString: "quick") == "The quick")
+               
         XCTAssert(value.left(characterCount: 9) == "The quick");
         XCTAssert(value.right(characterCount: 8) == "lazy dog");
                 

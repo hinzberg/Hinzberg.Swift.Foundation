@@ -2,6 +2,8 @@
 ##  A Swift Package - Helper Classes for macOS / iOS (Foundation)
 
 2022-05-25
+- String extension ***substringBeforeIncluding*** added
+- String extension ***substringAfterIncluding*** added
 - String extension parameter ***anotherString*** or ***subString*** renamed to ***searchString***
 - String extension ***getIndexOf*** renamed to ***indexOf***
 - String extension ***substringLeftFrom*** renamed to ***substringLeftBefore***
