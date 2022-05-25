@@ -2,6 +2,9 @@
 ##  A Swift Package - Helper Classes for macOS / iOS (Foundation)
 
 2022-05-25
+- String extension ***trim*** added
+- String extension ***fixEncoding*** added
+- String extension ***removeInvalidFilenameCharacters*** added
 - String extension ***substringBeforeIncluding*** added
 - String extension ***substringAfterIncluding*** added
 - String extension parameter ***anotherString*** or ***subString*** renamed to ***searchString***

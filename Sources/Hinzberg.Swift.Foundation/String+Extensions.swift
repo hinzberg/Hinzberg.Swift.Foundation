@@ -5,6 +5,11 @@ import Foundation
 
 public extension String
 {
+    func trim() -> String
+    {
+        return self.self.trimmingCharacters(in: NSCharacterSet.whitespaces)
+    }
+        
     // MARK: - left & right
     
     public func left(characterCount : Int) -> String
@@ -192,10 +197,7 @@ public extension String
     
 
     
-    public func appendingPathComponent(_ string: String) -> String
-    {
-        return URL(fileURLWithPath: self).appendingPathComponent(string).path
-    }
+
     
     //MARK: Deprecated functions
     
