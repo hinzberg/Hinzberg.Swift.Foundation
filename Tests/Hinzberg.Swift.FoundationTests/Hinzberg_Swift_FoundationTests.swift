@@ -19,10 +19,10 @@ final class Hinzberg_Swift_FoundationTests: XCTestCase {
     {
         let value = "The quick brown fox jumps over the lazy dog"
         
-        XCTAssert(value.getIndexOf(substring: "quick") == 4)
-        XCTAssert(value.caseInsensitiveBeginsWith(anotherString: "the"))
-        XCTAssert(value.caseInsensitiveEndsWith(anotherString: "dog"))
-        XCTAssert(value.caseInsensitiveContains(substring: "fox"))
+        XCTAssert(value.getIndexOf(searchString: "quick") == 4)
+        XCTAssert(value.caseInsensitiveBeginsWith(searchString: "the"))
+        XCTAssert(value.caseInsensitiveEndsWith(searchString:  "dog"))
+        XCTAssert(value.caseInsensitiveContains(searchString: "fox"))
         
         // XCTAssert(value.substringRightOf(searchString: "lazy") == " dog") deprecated
         XCTAssert(value.substringAfter(searchString:  "lazy") == " dog")
@@ -35,8 +35,8 @@ final class Hinzberg_Swift_FoundationTests: XCTestCase {
         XCTAssert(value.left(characterCount: 9) == "The quick");
         XCTAssert(value.right(characterCount: 8) == "lazy dog");
                 
-        XCTAssert(value.substringRightFrom(characterCount: 10) == "brown fox jumps over the lazy dog")
-        XCTAssert(value.substringLeftFrom(characterCount: 9) == "The quick brown fox jumps over the")
+        XCTAssert(value.substringRightAfter(characterCount: 10) == "brown fox jumps over the lazy dog")
+        XCTAssert(value.substringLeftBefore(characterCount: 9) == "The quick brown fox jumps over the")
     }
     
     func testArrayHelper() {

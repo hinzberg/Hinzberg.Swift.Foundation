@@ -1,11 +1,12 @@
 //  String+Extensions
-//  Created by Holger Hinzberg on 14.06.14.
-//  Copyright (c) 2014 Holger Hinzberg. All rights reserved.
+//  Copyright (c) 2022 Holger Hinzberg. All rights reserved.
 
 import Foundation
 
 public extension String
 {
+    // MARK: - left & right
+    
     public func left(characterCount : Int) -> String
     {
         if characterCount > 0 && characterCount < self.count
@@ -26,21 +27,62 @@ public extension String
         return self
     }
     
+    // MARK: - Case Insensitive Comparision
     
-    public func caseInsensitiveContains(substring:String) -> Bool
+    public func caseInsensitiveEndsWith(searchString:String)->Bool
     {
-        if (self.lowercased().contains(substring.lowercased()))
+        let indexOfAnotherString = getIndexOf(searchString: searchString, options: NSString.CompareOptions.caseInsensitive)
+        if let indexOfAnotherString = indexOfAnotherString
+        {
+            let endIndex:Int = self.count - searchString.count
+            if indexOfAnotherString == endIndex
+            {
+                return true
+            }
+        }
+        return false
+    }
+    
+    public func caseInsensitiveBeginsWith(searchString:String)->Bool
+    {
+        let indexOfAnotherString = getIndexOf(searchString: searchString, options: NSString.CompareOptions.caseInsensitive)
+        if let indexOfAnotherString = indexOfAnotherString
+        {
+            if indexOfAnotherString == 0
+            {
+                return true
+            }
+        }
+        return false
+    }
+        
+    public func caseInsensitiveContains(searchString:String) -> Bool
+    {
+        if (self.lowercased().contains(searchString.lowercased()))
         {
             return true
         }
         return false
     }
     
-    public func getIndexOf(substring:String)->Int
+    public func getIndexOf(searchString:String, options: NSString.CompareOptions? = nil)->Int?
     {
-        let theRange:Range = self.lowercased().range(of:substring.lowercased())!
-        let index: Int = self.distance(from: self.startIndex, to: theRange.lowerBound)
-        return index
+        var theRange : Range<String.Index>?
+        if let options = options
+        {
+            theRange = self.range(of: searchString, options: options)
+        }
+        else
+        {
+            theRange = self.range(of: searchString)
+        }
+        
+        if let theRange = theRange
+        {
+            let index: Int = self.distance(from: self.startIndex, to: theRange.lowerBound)
+            return index
+        }
+        return nil
     }
 
     public func substringBefore(searchString:String, options: NSString.CompareOptions? = nil) ->String
@@ -63,9 +105,7 @@ public extension String
         }
         return self
     }
-    
-
-    
+        
     public func substringAfter(searchString:String, options: NSString.CompareOptions? = nil) ->String
     {
         var theRange : Range<String.Index>?
@@ -87,9 +127,7 @@ public extension String
     }
     
     
-
-    
-    public func substringRightFrom(characterCount:Int) -> String
+    public func substringRightAfter(characterCount:Int) -> String
     {
         if characterCount > 0 && characterCount < self.count
         {
@@ -98,10 +136,8 @@ public extension String
         }
         return self
     }
-    
-
-    
-    public func substringLeftFrom(characterCount:Int) -> String
+        
+    public func substringLeftBefore(characterCount:Int) -> String
     {
         if characterCount > 0 && characterCount < self.count
         {
@@ -111,29 +147,7 @@ public extension String
         return self
     }
     
-    public func caseInsensitiveEndsWith(anotherString:String)->Bool
-    {
-        // Position wo die Zeichenkette ist.
-        let indexOfAnotherString = getIndexOf(substring: anotherString)
-        // Position wo die Zeichenkette sein sollten wenn sie am Ende wäre
-        let endIndex:Int = self.count - anotherString.count
-        
-        if indexOfAnotherString == endIndex
-        {
-            return true
-        }
-        return false
-    }
-    
-    public func caseInsensitiveBeginsWith(anotherString:String)->Bool
-    {
-        let indexOfAnotherString = getIndexOf(substring: anotherString)
-        if indexOfAnotherString == 0
-        {
-            return true
-        }
-        return false
-    }
+
     
     public func appendingPathComponent(_ string: String) -> String
     {
@@ -165,6 +179,5 @@ public extension String
             return str
         }
         return self
-    }
-    
+    }    
 }
